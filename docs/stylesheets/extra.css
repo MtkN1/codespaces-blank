@@ -1,0 +1,58 @@
+:root {
+  --c-mcp: #6b7280;
+  --c-acp: #e8590c;
+  --c-a2a: #1c7ed6;
+  --c-ahp: #2f9e44;
+}
+
+/* プロトコルのバッジ */
+.badge {
+  display: inline-block;
+  padding: 0 .55em;
+  border-radius: 1em;
+  font-size: .8em;
+  font-weight: 700;
+  color: #fff;
+  vertical-align: middle;
+}
+.badge.mcp { background: var(--c-mcp); }
+.badge.acp { background: var(--c-acp); }
+.badge.a2a { background: var(--c-a2a); }
+.badge.ahp { background: var(--c-ahp); }
+
+/* カードの並び */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: .8rem;
+  margin: 1.2em 0;
+}
+.cards > div {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-top: 4px solid var(--md-accent-fg-color);
+  border-radius: .4rem;
+  padding: .6rem .8rem;
+  background: var(--md-code-bg-color);
+}
+.cards > div.mcp { border-top-color: var(--c-mcp); }
+.cards > div.acp { border-top-color: var(--c-acp); }
+.cards > div.a2a { border-top-color: var(--c-a2a); }
+.cards > div.ahp { border-top-color: var(--c-ahp); }
+.cards > div p { margin: .3em 0; }
+.cards .big { font-size: 1.6em; line-height: 1.2; }
+
+/* 1 行サマリー */
+.oneliner {
+  font-size: 1.15em;
+  border-left: 4px solid var(--md-accent-fg-color);
+  padding: .4em .9em;
+  margin: 1em 0;
+  background: var(--md-code-bg-color);
+}
+
+/* Mermaid 図を中央に、はみ出したら横スクロール */
+.mermaid {
+  text-align: center;
+  overflow-x: auto;
+}
+.md-typeset table:not([class]) { font-size: .72rem; }

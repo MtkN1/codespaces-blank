@@ -1,0 +1,118 @@
+[project]
+site_name = "エージェントプロトコル入門"
+site_description = "A2A・AHP・ACP をゼロから学び、自分のユースケースで使えるようになるための図解ガイド"
+site_author = "kntm2r"
+copyright = "図解エージェントプロトコル入門 · 各仕様の内容は 2026 年 10 月時点の公式資料に基づきます"
+use_directory_urls = false
+
+nav = [
+  { "はじめに" = "index.md" },
+  { "第 1 章 基礎" = [
+    "basics/index.md",
+    "basics/typing-protocol.md",
+    "basics/jsonrpc.md",
+    "basics/map.md",
+  ] },
+  { "第 2 章 ACP" = [
+    "acp/index.md",
+    "acp/flow.md",
+    "acp/hands-on.md",
+  ] },
+  { "第 3 章 A2A" = [
+    "a2a/index.md",
+    "a2a/task.md",
+    "a2a/hands-on.md",
+  ] },
+  { "第 4 章 AHP" = [
+    "ahp/index.md",
+    "ahp/sync.md",
+    "ahp/hands-on.md",
+  ] },
+  { "第 5 章 実践" = [
+    "practice/choose.md",
+    "practice/usecases.md",
+    "practice/combine.md",
+    "practice/safety.md",
+  ] },
+  { "付録" = [
+    "appendix/quiz.md",
+    "appendix/cheatsheet.md",
+    "appendix/glossary.md",
+    "appendix/links.md",
+  ] },
+]
+
+extra_css = ["stylesheets/extra.css"]
+
+[project.theme]
+language = "ja"
+features = [
+  "content.code.annotate",
+  "content.code.copy",
+  "content.tabs.link",
+  "content.tooltips",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.path",
+  "navigation.sections",
+  "navigation.tabs",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+  "toc.follow",
+]
+
+[project.theme.icon]
+logo = "lucide/network"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "ライトモードへ"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "indigo"
+accent = "deep orange"
+toggle.icon = "lucide/sun"
+toggle.name = "ダークモードへ"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "indigo"
+accent = "deep orange"
+toggle.icon = "lucide/moon"
+toggle.name = "システム設定に従う"
+
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+tables = {}
+toc.permalink = true
+pymdownx.betterem = {}
+pymdownx.caret = {}
+pymdownx.details = {}
+pymdownx.emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
+pymdownx.emoji.emoji_index = "zensical.extensions.emoji.twemoji"
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.mark = {}
+pymdownx.smartsymbols = {}
+pymdownx.snippets.base_path = ["examples"]
+pymdownx.snippets.check_paths = true
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+pymdownx.tabbed.alternate_style = true
+pymdownx.tabbed.combine_header_slug = true
+pymdownx.tasklist.custom_checkbox = true
+pymdownx.tilde = {}
