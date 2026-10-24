@@ -12,6 +12,7 @@ mypy --strict --ignore-missing-imports examples/
 rm -rf site
 zensical build
 
-# Mermaid の読み込み先を正確なバージョンに固定する (CDN の範囲指定を避ける)
-sed -i 's#unpkg.com/mermaid@11/#unpkg.com/mermaid@11.4.1/#g' site/assets/javascripts/bundle.*.min.js
-! grep -rq 'mermaid@11/' site
+# Mermaid 図をビルド時に静的な SVG にする (閲覧時に JavaScript や CDN を使わない)
+(cd tools && npm ci --silent --no-audit --no-fund)
+node tools/mermaid-to-svg.js site
+! grep -rq '<pre class="mermaid">' site

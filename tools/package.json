@@ -1,0 +1,8 @@
+{
+  "name": "agent-protocols-site-tools",
+  "private": true,
+  "description": "ビルド時に Mermaid 図を SVG に変換するための道具",
+  "devDependencies": {
+    "mermaid": "11.4.1"
+  }
+}

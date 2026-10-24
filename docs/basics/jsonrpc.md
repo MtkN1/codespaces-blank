@@ -11,11 +11,14 @@ flowchart TB
     end
     subgraph transport["運び方: プロトコルごとに違う"]
       direction LR
-      T1["標準入出力 (stdio)<br/><span class='badge acp'>ACP</span>"]
-      T2["HTTP / SSE<br/><span class='badge a2a'>A2A</span>"]
-      T3["WebSocket<br/><span class='badge ahp'>AHP</span>"]
+      T1["標準入出力 (stdio)<br/>ACP"]
+      T2["HTTP / SSE<br/>A2A"]
+      T3["WebSocket<br/>AHP"]
     end
     content --> transport
+    style T1 fill:#e8590c,color:#fff,stroke:#e8590c
+    style T2 fill:#1c7ed6,color:#fff,stroke:#1c7ed6
+    style T3 fill:#2f9e44,color:#fff,stroke:#2f9e44
 ```
 
 手紙に例えると、**JSON-RPC が便箋の書式**で、**stdio / HTTP / WebSocket が郵便・宅配便・バイク便**です。

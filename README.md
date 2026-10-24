@@ -6,7 +6,7 @@ A2A・AHP・ACP をゼロから学び、ユーザーとして自分のユース�
 
 ```bash
 python -m venv .venv
-.venv/bin/pip install zensical mypy
+.venv/bin/pip install zensical mypy   # Node.js と Playwright (Chromium) も必要
 PATH=$PWD/.venv/bin:$PATH ./build.sh   # site/ に出力
 ```
 
@@ -16,4 +16,5 @@ PATH=$PWD/.venv/bin:$PATH ./build.sh   # site/ に出力
 
 - `docs/`: ページ (Markdown)
 - `examples/`: ページに埋め込む `typing.Protocol` の概念コード (`--8<--` で読み込み)
+- `tools/mermaid-to-svg.js`: ビルド後に Mermaid 図を静的 SVG (ライト用・ダーク用) に変換する
 - `zensical.toml`: サイト設定

@@ -122,9 +122,18 @@
 .md-typeset ol.roadmap li.a2a span,
 .md-typeset ol.roadmap li.ahp span { color: #fff; }
 
-/* Mermaid 図を中央に、はみ出したら横スクロール */
-.mermaid {
-  text-align: center;
+/* ビルド時に SVG にした Mermaid 図。テーマに合わせてライト用・ダーク用を出し分ける */
+.mmd {
+  margin: 1em 0;
   overflow-x: auto;
+  text-align: center;
 }
+.mmd svg {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+.mmd-dark,
+[data-md-color-scheme="slate"] .mmd-light { display: none; }
+[data-md-color-scheme="slate"] .mmd-dark { display: block; }
 .md-typeset table:not([class]) { font-size: .72rem; }
