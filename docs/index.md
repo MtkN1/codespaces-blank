@@ -24,30 +24,52 @@
 
 ## 1 枚で見る全体像
 
-```mermaid
-flowchart LR
-    U(("あなた"))
-    subgraph screens["画面 (クライアント)"]
-      E["エディタ<br/>Zed / JetBrains"]
-      W["VS Code<br/>ブラウザ"]
-    end
-    H["エージェントホスト"]
-    A["自分の<br/>エージェント"]
-    R["他人の<br/>エージェント"]
-    T[("道具<br/>DB / API")]
+<div class="figure">
+<svg class="pd" viewBox="0 0 860 300" role="img" aria-label="あなたが画面からエージェントを使い、エージェントが他人のエージェントや道具とつながる全体像">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="pd-head"/></marker>
+    <marker id="ah-acp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" class="pd-head acp"/></marker>
+    <marker id="ah-ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" class="pd-head ahp"/></marker>
+    <marker id="ah-a2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" class="pd-head a2a"/></marker>
+    <marker id="ah-mcp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="pd-head mcp"/></marker>
+  </defs>
+  <rect class="pd-group" x="88" y="22" width="184" height="256" rx="10"/>
+  <text class="pd-cap" x="180" y="42">画面 (クライアント)</text>
+  <circle class="pd-box" cx="40" cy="150" r="30"/>
+  <text class="pd-t" x="40" y="155">あなた</text>
+  <rect class="pd-box" x="105" y="58" width="150" height="56" rx="6"/>
+  <text class="pd-t" x="180" y="82">エディタ</text>
+  <text class="pd-s" x="180" y="102">Zed / JetBrains</text>
+  <rect class="pd-box" x="105" y="200" width="150" height="56" rx="6"/>
+  <text class="pd-t" x="180" y="224">VS Code</text>
+  <text class="pd-s" x="180" y="244">ブラウザ</text>
+  <rect class="pd-box" x="330" y="200" width="150" height="56" rx="6"/>
+  <text class="pd-t" x="405" y="233">エージェントホスト</text>
+  <rect class="pd-box pd-strong" x="530" y="118" width="130" height="64" rx="6"/>
+  <text class="pd-t" x="595" y="145">自分の</text>
+  <text class="pd-t" x="595" y="166">エージェント</text>
+  <rect class="pd-box" x="710" y="40" width="130" height="56" rx="6"/>
+  <text class="pd-t" x="775" y="64">他人の</text>
+  <text class="pd-t" x="775" y="84">エージェント</text>
+  <rect class="pd-box" x="710" y="200" width="130" height="56" rx="6"/>
+  <text class="pd-t" x="775" y="224">道具</text>
+  <text class="pd-s" x="775" y="244">DB / API</text>
 
-    U --> E & W
-    E -- "ACP" --> A
-    W -- "AHP" --> H
-    H -- "ACP など" --> A
-    A -- "A2A" --> R
-    A -- "MCP" --> T
+  <path class="pd-e" d="M68 138 L103 96" marker-end="url(#ah)"/>
+  <path class="pd-e" d="M68 162 L103 210" marker-end="url(#ah)"/>
+  <path class="pd-e acp" d="M255 86 C390 86 450 134 528 140" marker-end="url(#ah-acp)"/>
+  <path class="pd-e ahp" d="M255 228 L328 228" marker-end="url(#ah-ahp)"/>
+  <path class="pd-e acp dash" d="M480 222 C510 210 515 185 540 182" marker-end="url(#ah-acp)"/>
+  <path class="pd-e a2a" d="M660 132 L708 80" marker-end="url(#ah-a2a)"/>
+  <path class="pd-e mcp dash" d="M660 168 L708 214" marker-end="url(#ah-mcp)"/>
 
-    linkStyle 2 stroke:#e8590c,stroke-width:3px
-    linkStyle 3 stroke:#2f9e44,stroke-width:3px
-    linkStyle 5 stroke:#1c7ed6,stroke-width:3px
-    linkStyle 6 stroke:#6b7280,stroke-width:2px,stroke-dasharray:4
-```
+  <g class="pd-label acp"><rect x="370" y="94" width="48" height="22" rx="11"/><text x="394" y="110">ACP</text></g>
+  <g class="pd-label ahp"><rect x="268" y="204" width="48" height="22" rx="11"/><text x="292" y="220">AHP</text></g>
+  <g class="pd-label acp"><rect x="470" y="246" width="78" height="22" rx="11"/><text x="509" y="262">ACP など</text></g>
+  <g class="pd-label a2a"><rect x="664" y="82" width="48" height="22" rx="11"/><text x="688" y="98">A2A</text></g>
+  <g class="pd-label mcp"><rect x="664" y="200" width="48" height="22" rx="11"/><text x="688" y="216">MCP</text></g>
+</svg>
+</div>
 
 !!! tip "まずはここだけ覚えれば OK"
     | プロトコル | つなぐもの | 関係 | ひとことで |
@@ -59,18 +81,14 @@ flowchart LR
 
 ## 学習ロードマップ
 
-```mermaid
-flowchart LR
-    B["第 1 章<br/>基礎<br/><small>なぜ必要? / 共通の土台</small>"] --> ACP["第 2 章<br/>ACP"]
-    ACP --> A2A["第 3 章<br/>A2A"]
-    A2A --> AHP["第 4 章<br/>AHP"]
-    AHP --> P["第 5 章<br/>実践<br/><small>選び方 / 組み合わせ / 安全</small>"]
-    P --> Q["付録<br/>理解度チェック"]
-
-    style ACP fill:#e8590c,color:#fff,stroke:#e8590c
-    style A2A fill:#1c7ed6,color:#fff,stroke:#1c7ed6
-    style AHP fill:#2f9e44,color:#fff,stroke:#2f9e44
-```
+<ol class="roadmap">
+  <li><a href="basics/index.html"><b>第 1 章 基礎</b><span>なぜ必要? / 共通の土台</span></a></li>
+  <li class="acp"><a href="acp/index.html"><b>第 2 章 ACP</b><span>エディタ ⇄ エージェント</span></a></li>
+  <li class="a2a"><a href="a2a/index.html"><b>第 3 章 A2A</b><span>エージェント ⇄ エージェント</span></a></li>
+  <li class="ahp"><a href="ahp/index.html"><b>第 4 章 AHP</b><span>複数の画面 ⇄ ホスト</span></a></li>
+  <li><a href="practice/choose.html"><b>第 5 章 実践</b><span>選び方 / 組み合わせ / 安全</span></a></li>
+  <li><a href="appendix/quiz.html"><b>付録</b><span>理解度チェック</span></a></li>
+</ol>
 
 各章は同じ並びになっています。
 

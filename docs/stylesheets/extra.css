@@ -50,6 +50,78 @@
   background: var(--md-code-bg-color);
 }
 
+/* トップページの手描き SVG 図 (ホスト側の Mermaid 描画と衝突しないよう SVG で描く) */
+.figure { overflow-x: auto; margin: 1em 0; }
+.pd { display: block; width: 100%; min-width: 34rem; max-width: 46rem; margin: 0 auto; height: auto; }
+.pd text { font-family: var(--md-text-font-family); text-anchor: middle; }
+.pd-box { fill: var(--md-code-bg-color); stroke: var(--md-default-fg-color--light); stroke-width: 1.5; }
+.pd-strong { stroke: var(--md-accent-fg-color); stroke-width: 2.5; }
+.pd-group { fill: none; stroke: var(--md-default-fg-color--lighter); stroke-dasharray: 5 4; }
+.pd-t { fill: var(--md-default-fg-color); font-size: 15px; font-weight: 600; }
+.pd-s, .pd-cap { fill: var(--md-default-fg-color--light); font-size: 12px; }
+.pd-head { fill: var(--md-default-fg-color--light); }
+.pd-head.acp { fill: var(--c-acp); }
+.pd-head.ahp { fill: var(--c-ahp); }
+.pd-head.a2a { fill: var(--c-a2a); }
+.pd-head.mcp { fill: var(--c-mcp); }
+.pd-e { fill: none; stroke: var(--md-default-fg-color--light); stroke-width: 1.5; }
+.pd-e.acp { stroke: var(--c-acp); stroke-width: 3; }
+.pd-e.ahp { stroke: var(--c-ahp); stroke-width: 3; }
+.pd-e.a2a { stroke: var(--c-a2a); stroke-width: 3; }
+.pd-e.mcp { stroke: var(--c-mcp); stroke-width: 2; }
+.pd-e.dash { stroke-dasharray: 6 4; }
+.pd-label text { fill: #fff; font-size: 12px; font-weight: 700; }
+.pd-label.acp rect { fill: var(--c-acp); }
+.pd-label.ahp rect { fill: var(--c-ahp); }
+.pd-label.a2a rect { fill: var(--c-a2a); }
+.pd-label.mcp rect { fill: var(--c-mcp); }
+
+/* 学習ロードマップ */
+.md-typeset ol.roadmap {
+  list-style: none;
+  margin: 1em 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.4rem;
+  counter-reset: none;
+}
+.md-typeset ol.roadmap li {
+  margin: 0;
+  position: relative;
+  flex: 1 1 8.5rem;
+}
+.md-typeset ol.roadmap li:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--md-default-fg-color--light);
+}
+.md-typeset ol.roadmap a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: .5rem .7rem;
+  border-radius: .4rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  background: var(--md-code-bg-color);
+  color: var(--md-default-fg-color);
+  text-decoration: none;
+}
+.md-typeset ol.roadmap a:hover { border-color: var(--md-accent-fg-color); }
+.md-typeset ol.roadmap span { font-size: .85em; color: var(--md-default-fg-color--light); }
+.md-typeset ol.roadmap li.acp a { background: var(--c-acp); border-color: var(--c-acp); }
+.md-typeset ol.roadmap li.a2a a { background: var(--c-a2a); border-color: var(--c-a2a); }
+.md-typeset ol.roadmap li.ahp a { background: var(--c-ahp); border-color: var(--c-ahp); }
+.md-typeset ol.roadmap li.acp a,
+.md-typeset ol.roadmap li.a2a a,
+.md-typeset ol.roadmap li.ahp a,
+.md-typeset ol.roadmap li.acp span,
+.md-typeset ol.roadmap li.a2a span,
+.md-typeset ol.roadmap li.ahp span { color: #fff; }
+
 /* Mermaid 図を中央に、はみ出したら横スクロール */
 .mermaid {
   text-align: center;
