@@ -11,35 +11,31 @@ flowchart LR
     style P fill:#e8590c,color:#fff,stroke:#e8590c
 ```
 
-=== "① initialize: 自己紹介"
+### ① initialize: 自己紹介
 
-    ```mermaid
-    sequenceDiagram
-        participant E as エディタ
-        participant A as エージェント
-        E->>A: initialize (バージョン 1, 「ファイル読み書きと端末を貸せます」)
-        A-->>E: (バージョン 1, 「画像も読めます・会話の再開もできます」)
-    ```
+```mermaid
+sequenceDiagram
+    participant E as エディタ
+    participant A as エージェント
+    E->>A: initialize (バージョン 1, 「ファイル読み書きと端末を貸せます」)
+    A-->>E: (バージョン 1, 「画像も読めます・会話の再開もできます」)
+```
 
-    お互いに**できること (capabilities)** を申告します。相手ができないことは頼みません。
+お互いに**できること (capabilities)** を申告します。相手ができないことは頼みません。
 
-=== "② session/new: 会話を開く"
+### ② session/new: 会話を開く
 
-    ```mermaid
-    sequenceDiagram
-        participant E as エディタ
-        participant A as エージェント
-        E->>A: session/new (作業フォルダ, 使ってほしい MCP サーバー)
-        A-->>E: sessionId = "sess_abc", モード一覧
-    ```
+```mermaid
+sequenceDiagram
+    participant E as エディタ
+    participant A as エージェント
+    E->>A: session/new (作業フォルダ, 使ってほしい MCP サーバー)
+    A-->>E: sessionId = "sess_abc", モード一覧
+```
 
-    1 つの接続で、**複数の会話 (セッション)** を同時に持てます。エディタに設定した MCP サーバーも、ここでエージェントに渡されます。
+1 つの接続で、**複数の会話 (セッション)** を同時に持てます。エディタに設定した MCP サーバーも、ここでエージェントに渡されます。
 
-=== "③ session/prompt: 依頼する"
-
-    下の詳しい図を見てください。
-
-## ③ の詳しい流れ
+### ③ session/prompt: 依頼する (詳しい流れ)
 
 ```mermaid
 sequenceDiagram

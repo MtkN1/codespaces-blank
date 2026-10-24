@@ -102,52 +102,60 @@ sequenceDiagram
 
 ## 結果の受け取り方は 3 通り
 
-=== "① 待つ / 見に行く (ポーリング)"
+| 受け取り方 | 向いている仕事 | 頼む側が用意するもの | 相手の名刺の条件 |
+|---|---|---|---|
+| ① ポーリング | 数秒〜数分で終わる | 特になし (`GetTask` を繰り返す) | なし |
+| ② ストリーミング | 途中経過を画面に出したい | SSE を受け取れる接続 | `capabilities.streaming: true` |
+| ③ プッシュ通知 | 何時間・何日もかかる | 通知を受ける Webhook の URL | `capabilities.pushNotifications: true` |
 
-    ```mermaid
-    sequenceDiagram
-        participant C as 頼む側
-        participant S as 頼まれる側
-        C->>S: SendMessage
-        S-->>C: Task (WORKING)
-        loop ときどき見に行く
-          C->>S: GetTask
-          S-->>C: Task (WORKING)
-        end
-        C->>S: GetTask
-        S-->>C: Task (COMPLETED + Artifact)
-    ```
-    **一番シンプル。** 数秒〜数分で終わる仕事向け。
+それぞれの流れは次のとおりです。
 
-=== "② 流してもらう (ストリーミング)"
+### ① 待つ / 見に行く (ポーリング)
 
-    ```mermaid
-    sequenceDiagram
-        participant C as 頼む側
-        participant S as 頼まれる側
-        C->>S: SendStreamingMessage
-        S--)C: Task (SUBMITTED)
-        S--)C: StatusUpdate (WORKING)
-        S--)C: ArtifactUpdate (途中の成果物)
-        S--)C: StatusUpdate (COMPLETED)
-        Note over C,S: 終端状態になるとストリームが閉じる
-    ```
-    **途中経過を画面に出したい**とき向け。名刺の `capabilities.streaming` が `true` の相手だけ使えます。HTTP の **SSE** (Server-Sent Events) で届きます。
+```mermaid
+sequenceDiagram
+    participant C as 頼む側
+    participant S as 頼まれる側
+    C->>S: SendMessage
+    S-->>C: Task (WORKING)
+    loop ときどき見に行く
+      C->>S: GetTask
+      S-->>C: Task (WORKING)
+    end
+    C->>S: GetTask
+    S-->>C: Task (COMPLETED + Artifact)
+```
+**一番シンプル。** 数秒〜数分で終わる仕事向け。
 
-=== "③ 後で知らせてもらう (プッシュ通知)"
+### ② 流してもらう (ストリーミング)
 
-    ```mermaid
-    sequenceDiagram
-        participant C as 頼む側
-        participant W as 頼む側の Webhook
-        participant S as 頼まれる側
-        C->>S: SendMessage + 通知先 URL
-        S-->>C: Task (WORKING)
-        Note over C: 接続を切って待つ
-        S->>W: POST「task-1 が完了しました」
-        W->>S: GetTask
-    ```
-    **何時間・何日もかかる仕事**向け。名刺の `capabilities.pushNotifications` が `true` の相手だけ使えます。
+```mermaid
+sequenceDiagram
+    participant C as 頼む側
+    participant S as 頼まれる側
+    C->>S: SendStreamingMessage
+    S--)C: Task (SUBMITTED)
+    S--)C: StatusUpdate (WORKING)
+    S--)C: ArtifactUpdate (途中の成果物)
+    S--)C: StatusUpdate (COMPLETED)
+    Note over C,S: 終端状態になるとストリームが閉じる
+```
+**途中経過を画面に出したい**とき向け。名刺の `capabilities.streaming` が `true` の相手だけ使えます。HTTP の **SSE** (Server-Sent Events) で届きます。
+
+### ③ 後で知らせてもらう (プッシュ通知)
+
+```mermaid
+sequenceDiagram
+    participant C as 頼む側
+    participant W as 頼む側の Webhook
+    participant S as 頼まれる側
+    C->>S: SendMessage + 通知先 URL
+    S-->>C: Task (WORKING)
+    Note over C: 接続を切って待つ
+    S->>W: POST「task-1 が完了しました」
+    W->>S: GetTask
+```
+**何時間・何日もかかる仕事**向け。名刺の `capabilities.pushNotifications` が `true` の相手だけ使えます。
 
 ## 会話のまとまり: contextId
 

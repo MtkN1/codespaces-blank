@@ -6,39 +6,47 @@
 
 エディタが 3 つ、エージェントが 3 つあるとします。共通の約束が無いと、**組み合わせの数だけ専用のつなぎ込み**が必要になります。
 
-=== "プロトコル無し: 3 × 3 = 9 本"
+<div class="flip" markdown>
 
-    ```mermaid
-    flowchart LR
-        Z[Zed] --- C1[Claude Code]
-        Z --- C2[Gemini CLI]
-        Z --- C3[Codex]
-        J[JetBrains] --- C1
-        J --- C2
-        J --- C3
-        N[Neovim] --- C1
-        N --- C2
-        N --- C3
-    ```
+<div class="flip-item" data-label="プロトコル無し: 3 × 3 = 9 本" markdown>
 
-    - エディタを 1 つ増やすたびに、全エージェント分の作業が必要になる
-    - 「このエディタではこのエージェントしか使えない」という**囲い込み**が起きる
+```mermaid
+flowchart LR
+    Z[Zed] --- C1[Claude Code]
+    Z --- C2[Gemini CLI]
+    Z --- C3[Codex]
+    J[JetBrains] --- C1
+    J --- C2
+    J --- C3
+    N[Neovim] --- C1
+    N --- C2
+    N --- C3
+```
 
-=== "プロトコル有り: 3 + 3 = 6 本"
+- エディタを 1 つ増やすたびに、全エージェント分の作業が必要になる
+- 「このエディタではこのエージェントしか使えない」という**囲い込み**が起きる
 
-    ```mermaid
-    flowchart LR
-        Z[Zed] --- P{{"共通の約束<br/>(ACP)"}}
-        J[JetBrains] --- P
-        N[Neovim] --- P
-        P --- C1[Claude Code]
-        P --- C2[Gemini CLI]
-        P --- C3[Codex]
-        style P fill:#e8590c,color:#fff,stroke:#e8590c
-    ```
+</div>
 
-    - 各自は**約束に 1 回対応するだけ**でよい
-    - 新しいエージェントが出ても、すぐにすべてのエディタで使える
+<div class="flip-item" data-label="プロトコル有り: 3 + 3 = 6 本" markdown>
+
+```mermaid
+flowchart LR
+    Z[Zed] --- P{{"共通の約束<br/>(ACP)"}}
+    J[JetBrains] --- P
+    N[Neovim] --- P
+    P --- C1[Claude Code]
+    P --- C2[Gemini CLI]
+    P --- C3[Codex]
+    style P fill:#e8590c,color:#fff,stroke:#e8590c
+```
+
+- 各自は**約束に 1 回対応するだけ**でよい
+- 新しいエージェントが出ても、すぐにすべてのエディタで使える
+
+</div>
+
+</div>
 
 !!! example "身近な例"
     - **USB**: どのメーカーのマウスでも、どのパソコンにも挿せる

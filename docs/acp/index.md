@@ -4,24 +4,33 @@
 
 ## LSP と並べると分かる
 
-=== "LSP (おなじみ)"
+<div class="flip" markdown>
 
-    ```mermaid
-    flowchart LR
-        E1["VS Code"] & E2["Neovim"] & E3["Zed"] -- "LSP" --> L["言語サーバー<br/>pyright / rust-analyzer"]
-    ```
+<div class="flip-item" data-label="LSP (おなじみ)" markdown>
 
-    どのエディタでも、同じ言語サーバーで**補完・エラー表示**が使えます。
+```mermaid
+flowchart LR
+    E1["Zed"] & E2["JetBrains"] & E3["Neovim"] -- "LSP" --> L["言語サーバー<br/>pyright / rust-analyzer …"]
+    linkStyle 0,1,2 stroke:#5c6bc0,stroke-width:3px
+```
 
-=== "ACP"
+どのエディタでも、同じ言語サーバーで**補完・エラー表示**が使えます。
 
-    ```mermaid
-    flowchart LR
-        E1["Zed"] & E2["JetBrains"] & E3["Neovim"] -- "ACP" --> A["コーディングエージェント<br/>Claude Code / Gemini CLI / Codex …"]
-        linkStyle 0,1,2 stroke:#e8590c,stroke-width:3px
-    ```
+</div>
 
-    どのエディタでも、同じエージェントに**コードを書かせられます**。
+<div class="flip-item" data-label="ACP" markdown>
+
+```mermaid
+flowchart LR
+    E1["Zed"] & E2["JetBrains"] & E3["Neovim"] -- "ACP" --> A["コーディングエージェント<br/>Claude Code / Codex …"]
+    linkStyle 0,1,2 stroke:#e8590c,stroke-width:3px
+```
+
+どのエディタでも、同じエージェントに**コードを書かせられます**。
+
+</div>
+
+</div>
 
 ## 登場人物は 2 人だけ
 

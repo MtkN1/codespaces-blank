@@ -20,47 +20,55 @@ Agent Host は、VS Code の最新の Stable 版と Insiders 版で有効にな�
 
 ## 使い方は 3 通り
 
-=== "① ローカル (いちばん簡単)"
+| 使い方 | 始め方 | VS Code を閉じても続く? | 別の PC やブラウザから見る |
+|---|---|---|---|
+| ① ローカル | VS Code でセッションを始めるだけ | フォルダは閉じてよい。VS Code 本体は起動したまま | できない |
+| ② 単独で起動 | `code agent host` を実行 | 続く | 同じマシンの VS Code や自作クライアントから |
+| ③ 別のマシン | ワークスペースのあるマシンでホストを動かす | 続く | できる |
 
-    ```mermaid
-    flowchart LR
-        V["VS Code"] -- "MessagePort" --> H["Agent Host<br/>(VS Code の中の別プロセス)"]
-    ```
+それぞれの構成は次のとおりです。
 
-    1. フォルダを開き、ハーネスの選択で **Copilot** などを選んでセッションを始める
-    2. それだけで Agent Host 経由になります
+### ① ローカル (いちばん簡単)
 
-    !!! note
-        ローカルのホストは VS Code が管理しているので、**VS Code 自体は起動したまま**にしておく必要があります (フォルダを閉じるのは大丈夫です)。
+```mermaid
+flowchart LR
+    V["VS Code"] -- "MessagePort" --> H["Agent Host<br/>(VS Code の中の別プロセス)"]
+```
 
-=== "② 単独で起動する"
+1. フォルダを開き、ハーネスの選択で **Copilot** などを選んでセッションを始める
+2. それだけで Agent Host 経由になります
 
-    ```bash
-    code agent host            # Stable 版
-    code-insiders agent host   # Insiders 版
-    ```
+!!! note
+    ローカルのホストは VS Code が管理しているので、**VS Code 自体は起動したまま**にしておく必要があります (フォルダを閉じるのは大丈夫です)。
 
-    ```mermaid
-    flowchart LR
-        T["ターミナルで起動した<br/>Agent Host"] <-- "AHP (WebSocket)" --> V1["VS Code"]
-        T <-- "AHP" --> X["自作のクライアント<br/>CLI / スクリプト"]
-    ```
+### ② 単独で起動する
 
-    VS Code とは独立して動くので、**VS Code を閉じてもセッションが動き続けます**。自作のクライアントからつなぐこともできます。
+```bash
+code agent host            # Stable 版
+code-insiders agent host   # Insiders 版
+```
 
-=== "③ 別のマシンで動かす"
+```mermaid
+flowchart LR
+    T["ターミナルで起動した<br/>Agent Host"] <-- "AHP (WebSocket)" --> V1["VS Code"]
+    T <-- "AHP" --> X["自作のクライアント<br/>CLI / スクリプト"]
+```
 
-    ```mermaid
-    flowchart LR
-        subgraph remote["作業用マシン (サーバー・開発機)"]
-          H["Agent Host"] --- WS[("ワークスペース")]
-        end
-        D["手元の VS Code"] <-- "AHP over WebSocket" --> H
-        B["ブラウザ<br/>insiders.vscode.dev/agents"] <-- "AHP" --> H
-    ```
+VS Code とは独立して動くので、**VS Code を閉じてもセッションが動き続けます**。自作のクライアントからつなぐこともできます。
 
-    ホストを**ワークスペースのあるマシン**で動かし、手元の VS Code やブラウザからつなぎます。ファイルの編集はリモート側で行われます。
-    SSH・dev tunnels・Web からの接続手順は、VS Code の公式ドキュメントを参照してください。
+### ③ 別のマシンで動かす
+
+```mermaid
+flowchart LR
+    subgraph remote["作業用マシン (サーバー・開発機)"]
+      H["Agent Host"] --- WS[("ワークスペース")]
+    end
+    D["手元の VS Code"] <-- "AHP over WebSocket" --> H
+    B["ブラウザ<br/>insiders.vscode.dev/agents"] <-- "AHP" --> H
+```
+
+ホストを**ワークスペースのあるマシン**で動かし、手元の VS Code やブラウザからつなぎます。ファイルの編集はリモート側で行われます。
+SSH・dev tunnels・Web からの接続手順は、VS Code の公式ドキュメントを参照してください。
 
 ## VS Code 以外の AHP 対応ツール
 

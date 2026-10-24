@@ -4,31 +4,39 @@
 
 ## どんな困りごとを解決するのか
 
-=== "AHP が無いと"
+<div class="flip" markdown>
 
-    ```mermaid
-    flowchart LR
-        W1["VS Code<br/>ウィンドウ 1"] --> A1["エージェント<br/>(ウィンドウの中で動く)"]
-        W2["ブラウザ"] -. "見えない" .-> A1
-        X["ウィンドウを閉じる"] --> D["💥 作業も止まる"]
-    ```
+<div class="flip-item" data-label="AHP が無いと" markdown>
 
-    - セッションは**それを始めた画面の中**で動いている
-    - 別の画面からは見えない。画面を閉じると止まる
+```mermaid
+flowchart LR
+    W1["VS Code<br/>ウィンドウ 1"] --> A1["エージェント<br/>(ウィンドウの中で動く)"]
+    W2["ブラウザ"] -. "見えない" .-> A1
+    X["ウィンドウを閉じる"] --> D["💥 作業も止まる"]
+```
 
-=== "AHP が有ると"
+- セッションは**それを始めた画面の中**で動いている
+- 別の画面からは見えない。画面を閉じると止まる
 
-    ```mermaid
-    flowchart LR
-        W1["VS Code<br/>ウィンドウ 1"] <-->|AHP| H["Agent Host<br/>(独立したプロセス)<br/>セッションの正本"]
-        W2["VS Code<br/>ウィンドウ 2"] <-->|AHP| H
-        B["ブラウザ<br/>別の PC"] <-->|AHP| H
-        H --> A["エージェント<br/>Copilot / Claude / …"]
-        linkStyle 0,1,2 stroke:#2f9e44,stroke-width:3px
-    ```
+</div>
 
-    - セッションは**ホスト**が持っている。画面はそれを「見に行く」だけ
-    - 画面を閉じても作業は続く。別の画面から同じ作業を見て、承認や中断ができる
+<div class="flip-item" data-label="AHP が有ると" markdown>
+
+```mermaid
+flowchart LR
+    W1["VS Code<br/>ウィンドウ 1"] <-->|AHP| H["Agent Host<br/>(独立したプロセス)<br/>セッションの正本"]
+    W2["VS Code<br/>ウィンドウ 2"] <-->|AHP| H
+    B["ブラウザ<br/>別の PC"] <-->|AHP| H
+    H --> A["エージェント<br/>Copilot / Claude / …"]
+    linkStyle 0,1,2 stroke:#2f9e44,stroke-width:3px
+```
+
+- セッションは**ホスト**が持っている。画面はそれを「見に行く」だけ
+- 画面を閉じても作業は続く。別の画面から同じ作業を見て、承認や中断ができる
+
+</div>
+
+</div>
 
 !!! example "身近な例: Google ドキュメントの共同編集"
     ドキュメントの本体はサーバーにあり、全員の画面に同じ内容が映ります。誰かが書き込むと、すぐに全員の画面に反映されます。
