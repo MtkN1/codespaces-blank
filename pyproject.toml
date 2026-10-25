@@ -1,0 +1,60 @@
+[project]
+name = "a2a-claude-agent"
+version = "0.1.0"
+description = "Expose a Claude Agent SDK agent as an A2A (Agent2Agent) server"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "a2a-sdk[http-server]>=1.0",
+    "claude-agent-sdk>=0.2.174",
+    "pydantic-settings>=2.16.1",
+    "uvicorn>=0.54.0",
+]
+
+[project.scripts]
+a2a-claude-agent = "a2a_claude_agent.server:main"
+
+[build-system]
+requires = ["uv_build>=0.11.32,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "mypy>=2.4.0",
+    "psutil>=7.2.2",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.17.2",
+    "types-psutil>=7.2.2.20260906",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "integration: calls the real model through the Claude Agent SDK (run with `pytest -m integration`)",
+]
+addopts = "-m 'not integration'"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "ASYNC", "PT"]
+
+[tool.ruff.lint.per-file-ignores]
+# Japanese prompts use full-width punctuation on purpose.
+"tests/integration/*" = ["RUF001"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["a2a_claude_agent"]
+mypy_path = "src"
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
