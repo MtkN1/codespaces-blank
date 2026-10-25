@@ -55,6 +55,13 @@ async def collect(client, request):
     return [event async for event in client.send_message(request)]
 
 
+async def wait_for_no_children(within: float) -> None:
+    deadline = time.monotonic() + within
+    while claude_children():
+        assert time.monotonic() < deadline, f"CLI processes still running: {claude_children()}"
+        await asyncio.sleep(0.2)
+
+
 # 1 --------------------------------------------------------------------------------
 async def test_1_agent_card(make_settings, start_server):
     settings = make_settings(
@@ -243,7 +250,8 @@ async def test_6c_file_mentions_are_not_expanded(
 async def test_7_cancel(make_settings, start_server, connect, record_usage):
     server = start_server(make_settings(HAIKU, max_turns=1))
     client = await connect(server)
-    assert claude_children() == []
+    # CLIs of earlier tests may still be exiting after their task completed.
+    await wait_for_no_children(within=20)
 
     events: list = []
     first_event = asyncio.Event()
@@ -279,10 +287,7 @@ async def test_7_cancel(make_settings, start_server, connect, record_usage):
     record_usage(task, HAIKU)
 
     # The executor waits for the CLI to exit before reporting CANCELED.
-    deadline = time.monotonic() + 10
-    while claude_children():
-        assert time.monotonic() < deadline, f"leftover CLI processes: {claude_children()}"
-        await asyncio.sleep(0.2)
+    assert claude_children() == []
 
 
 # 8 --------------------------------------------------------------------------------
